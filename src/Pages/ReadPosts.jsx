@@ -39,7 +39,6 @@ function ReadPosts(props) {
                 )
             }
         </div>
-
     )
 }
 
