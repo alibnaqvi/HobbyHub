@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../Client.jsx'
-import Card from '../Components/Card.jsx';
+import { Link } from "react-router-dom";
 
 function ReadPosts(props) {
     const [posts, setPosts] = useState([]);
@@ -22,11 +22,17 @@ function ReadPosts(props) {
             {
                 posts && posts.length > 0 ? (
                     posts.map((post) => (
-                        <Card
-                            key={post.id}
-                            id={post.id}
-                            title={post.title}
-                        />
+                        <div key={post.id} className="crewmate-card-container">
+                            <Link to={`edit/${post.id}`}>
+                                <button className="header-button">Edit</button>
+                            </Link>
+
+                            <p className="crewmate-name">{post.title}</p>
+
+                            <Link to={`view/${post.id}`}>
+                                <button className="header-button">View</button>
+                            </Link>
+                        </div>
                     ))
                 ) : (
                     <p className="no-crewmates-message">{'No Posts Yet'}</p>

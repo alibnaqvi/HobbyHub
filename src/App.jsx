@@ -31,9 +31,16 @@ function App() {
         <div className="header-container">
             <div className="header-content">
                 <h1 className="header-title">HobbyHub</h1>
-                <Link to="/"><button className="header-button">List Posts</button></Link>
-                <Link to="/new"><button className="header-button">Submit Post</button></Link>
+
+                <Link to="/">
+                    <button className="header-button">List Posts</button>
+                </Link>
+
+                <Link to="/new">
+                    <button className="header-button">Submit Post</button>
+                </Link>
             </div>
+
             <div className="main-content">{element}</div>
         </div>
     );
