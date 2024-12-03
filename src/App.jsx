@@ -1,8 +1,8 @@
 import { Link, useRoutes } from 'react-router-dom'
-import ReadPosts from "./Pages/ReadPosts.jsx";
-import AddPost from "./Pages/AddPost.jsx";
-import ViewPost from "./Pages/ViewPost.jsx";
-import EditPost from "./Pages/EditPost.jsx";
+import ReadPosts from './Pages/ReadPosts.jsx'
+import AddPost from './Pages/AddPost.jsx'
+import ViewPost from './Pages/ViewPost.jsx'
+import EditPost from './Pages/EditPost.jsx'
 import './App.css'
 
 function App() {
@@ -25,25 +25,24 @@ function App() {
             path: "/view/:id",
             element: <ViewPost data={posts} />
         }
-    ]);
+    ])
 
     return (
         <div>
-            <div>
-                <h1>HobbyHub</h1>
+            <h1>HobbyHub</h1>
 
-                <Link to="/">
-                    <button>List Posts</button>
-                </Link>
+            <Link to="/"><button>All Posts</button></Link>
 
-                <Link to="/new">
-                    <button>Submit Post</button>
-                </Link>
-            </div>
+            <br/>
 
-            <div>{element}</div>
+            <Link to="/new"><button>Add a Post</button></Link>
+
+            <br/>
+            <br/>
+
+            {element}
         </div>
-    );
+    )
 }
 
-export default App;
+export default App

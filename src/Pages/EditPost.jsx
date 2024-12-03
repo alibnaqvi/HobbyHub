@@ -1,83 +1,72 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { supabase } from '../Client.jsx'
-import '../App.css';
+import '../App.css'
 
 function EditPost() {
-    const {id} = useParams();
-    const [post, setPost] = useState({ id: null, title: "" });
-    const [loading, setLoading] = useState(true);
+    const { id } = useParams()
+    const [post, setPost] = useState({ id: null, title: "" })
 
     useEffect(() => {
-        const fetchPost = async () => {
-            const { data, error } = await supabase
+        const fetchPost = async() => {
+            const { data } = await supabase
                 .from('Posts')
                 .select('*')
                 .eq('id', id)
-                .single();
+                .single()
 
-            if (error) {
-                console.error("Error fetching post:", error);
-            }
+            setPost(data)
+        }
 
-            else {
-                setPost(data);
-            }
-
-            setLoading(false);
-        };
-
-        fetchPost();
-    }, [id]);
+        fetchPost()
+    }, [id])
 
     const editPost = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         await supabase
             .from('Posts')
             .update({ title: post.title })
-            .eq('id', id);
+            .eq('id', id)
 
-        window.location = "/";
-    };
+        window.location = "/"
+    }
 
     const deletePost = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         await supabase
             .from('Posts')
             .delete()
-            .eq('id', id);
+            .eq('id', id)
 
-        window.location = "http://localhost:5173/";
-    };
-
-    function handleChange(event) {
-        const {name, value} = event.target;
-
-        setPost( (prev) => {
-            return {
-                ...prev,
-                [name]:value,
-            }
-        })
+        window.location = "http://localhost:5173/"
     }
 
-    if (loading) return <div>Loading...</div>;
+    function handleChange(event) {
+        const { name, value } = event.target
+
+        setPost( (prev) => { return {
+            ...prev,
+            [name]: value,
+        }})
+    }
 
     return (
         <div>
             <form>
-                <label htmlFor="name">Title</label>
+                <label htmlFor="name">Title:</label>
+
+                <br/>
 
                 <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
 
-                <input type="submit" value="Submit" onClick={editPost} />
+                <button onClick={editPost}>Confirm Changes</button>
 
-                <button onClick={deletePost}>Delete</button>
+                <button onClick={deletePost}>Delete Post</button>
             </form>
         </div>
     )
 }
 
-export default EditPost;
+export default EditPost
