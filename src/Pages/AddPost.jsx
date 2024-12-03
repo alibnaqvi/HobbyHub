@@ -1,25 +1,25 @@
-import { useState } from 'react'
-import { supabase } from '../Client.jsx'
+import {useState} from 'react'
+import {supabase} from '../Client.jsx'
 import '../App.css'
 
 function AddPost() {
-    const [post, setPost] = useState({ title: "" })
+    const [post, setPost] = useState({title: ""})
 
-    const addPost = async(event) => {
+    const addPost = async (event) => {
         event.preventDefault()
 
         await supabase
             .from('Posts')
-            .insert({ title: post.title })
+            .insert({title: post.title})
             .select()
 
         window.location = "/"
     }
 
     function handleChange(event) {
-        const { name, value } = event.target
+        const {name, value} = event.target
 
-        setPost( (prev) => ({
+        setPost((prev) => ({
             ...prev,
             [name]: value,
         }))
@@ -32,7 +32,7 @@ function AddPost() {
 
                 <br/>
 
-                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
+                <input type="text" id="title" name="title" value={post.title} onChange={handleChange}/>
 
                 <button onClick={addPost}>Submit Post</button>
             </form>

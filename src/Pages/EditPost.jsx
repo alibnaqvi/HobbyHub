@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { supabase } from '../Client.jsx'
+import {useEffect, useState} from 'react'
+import {useParams} from 'react-router-dom'
+import {supabase} from '../Client.jsx'
 import '../App.css'
 
 function EditPost() {
-    const { id } = useParams()
-    const [post, setPost] = useState({ id: null, title: "" })
+    const {id} = useParams()
+    const [post, setPost] = useState({id: null, title: ""})
 
     useEffect(() => {
-        const fetchPost = async() => {
-            const { data } = await supabase
+        const fetchPost = async () => {
+            const {data} = await supabase
                 .from('Posts')
                 .select('*')
                 .eq('id', id)
@@ -21,18 +21,18 @@ function EditPost() {
         fetchPost()
     }, [id])
 
-    const editPost = async(event) => {
+    const editPost = async (event) => {
         event.preventDefault()
 
         await supabase
             .from('Posts')
-            .update({ title: post.title })
+            .update({title: post.title})
             .eq('id', id)
 
         window.location = "/"
     }
 
-    const deletePost = async(event) => {
+    const deletePost = async (event) => {
         event.preventDefault()
 
         await supabase
@@ -44,12 +44,14 @@ function EditPost() {
     }
 
     function handleChange(event) {
-        const { name, value } = event.target
+        const {name, value} = event.target
 
-        setPost( (prev) => { return {
-            ...prev,
-            [name]: value,
-        }})
+        setPost((prev) => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
     }
 
     return (
@@ -59,7 +61,7 @@ function EditPost() {
 
                 <br/>
 
-                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
+                <input type="text" id="title" name="title" value={post.title} onChange={handleChange}/>
 
                 <button onClick={editPost}>Confirm Changes</button>
 
