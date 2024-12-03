@@ -21,7 +21,7 @@ function EditPost() {
         fetchPost()
     }, [id])
 
-    const editPost = async (event) => {
+    const editPost = async(event) => {
         event.preventDefault()
 
         await supabase

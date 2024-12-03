@@ -7,7 +7,7 @@ function ViewPost() {
     const [post, setPost] = useState(null)
 
     useEffect(() => {
-        const fetchPost = async () => {
+        const fetchPost = async() => {
             const { data } = await supabase
                 .from('Posts')
                 .select()
