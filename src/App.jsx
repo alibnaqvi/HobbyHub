@@ -1,5 +1,5 @@
 import { Link, useRoutes } from 'react-router-dom'
-import ReadPosts from './Pages/ReadPosts.jsx'
+import FetchPosts from './Pages/FetchPosts.jsx'
 import AddPost from './Pages/AddPost.jsx'
 import ViewPost from './Pages/ViewPost.jsx'
 import EditPost from './Pages/EditPost.jsx'
@@ -11,7 +11,7 @@ function App() {
     let element = useRoutes([
         {
             path: "/",
-            element:<ReadPosts data={posts}/>
+            element:<FetchPosts data={posts}/>
         },
         {
             path:"/edit/:id",

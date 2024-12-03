@@ -32,7 +32,7 @@ function EditPost() {
         window.location = "/"
     }
 
-    const deletePost = async (event) => {
+    const deletePost = async(event) => {
         event.preventDefault()
 
         await supabase
