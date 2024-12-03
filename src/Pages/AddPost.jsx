@@ -27,14 +27,14 @@ function AddPost() {
 
     return (
         <div>
-            <form>
-                <label htmlFor="name">Title:</label>
+            <form onSubmit={addPost}>
+                <label htmlFor="title">Title:</label>
 
                 <br/>
 
                 <input type="text" id="title" name="title" value={post.title} onChange={handleChange}/>
 
-                <button onClick={addPost}>Submit Post</button>
+                <button type="submit">Submit Post</button>
             </form>
         </div>
     )

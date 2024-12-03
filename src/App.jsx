@@ -1,4 +1,5 @@
 import {Link, useRoutes} from 'react-router-dom'
+import {useState} from "react"
 import FetchPosts from './Pages/FetchPosts.jsx'
 import AddPost from './Pages/AddPost.jsx'
 import ViewPost from './Pages/ViewPost.jsx'
@@ -6,20 +7,20 @@ import EditPost from './Pages/EditPost.jsx'
 import './App.css'
 
 function App() {
-    const posts = []
+    const [posts, setPosts] = useState([])
 
     let element = useRoutes([
         {
             path: "/",
-            element: <FetchPosts data={posts}/>
+            element: <FetchPosts data={posts} setData={setPosts}/>
         },
         {
             path: "/edit/:id",
-            element: <EditPost data={posts}/>
+            element: <EditPost data={posts} setData={setPosts}/>
         },
         {
             path: "/new",
-            element: <AddPost/>
+            element: <AddPost setData={setPosts}/>
         },
         {
             path: "/view/:id",

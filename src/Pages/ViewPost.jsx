@@ -17,7 +17,9 @@ function ViewPost() {
             setPost(data)
         }
 
-        fetchPost()
+        (async () => {
+            await fetchPost()
+        })()
     }, [id])
 
     return (

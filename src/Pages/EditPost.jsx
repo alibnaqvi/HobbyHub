@@ -5,7 +5,7 @@ import '../App.css'
 
 function EditPost() {
     const {id} = useParams()
-    const [post, setPost] = useState({id: null, title: ""})
+    const [post, setPost] = useState({title: ""})
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -18,7 +18,9 @@ function EditPost() {
             setPost(data)
         }
 
-        fetchPost()
+        (async () => {
+            await fetchPost()
+        })()
     }, [id])
 
     const editPost = async (event) => {
@@ -32,40 +34,37 @@ function EditPost() {
         window.location = "/"
     }
 
-    const deletePost = async (event) => {
-        event.preventDefault()
-
+    const deletePost = async () => {
         await supabase
             .from('Posts')
             .delete()
             .eq('id', id)
 
-        window.location = "http://localhost:5173/"
+        window.location = "/"
     }
 
     function handleChange(event) {
         const {name, value} = event.target
 
-        setPost((prev) => {
-            return {
-                ...prev,
-                [name]: value,
-            }
-        })
+        setPost((prev) => ({
+            ...prev,
+            [name]: value,
+        }))
     }
 
     return (
         <div>
-            <form>
-                <label htmlFor="name">Title:</label>
+            <form onSubmit={editPost}>
+                <label htmlFor="title">Title:</label>
 
                 <br/>
 
                 <input type="text" id="title" name="title" value={post.title} onChange={handleChange}/>
 
-                <button onClick={editPost}>Confirm Changes</button>
+                <br/>
 
-                <button onClick={deletePost}>Delete Post</button>
+                <button type="submit">Confirm Changes</button>
+                <button type="button" onClick={deletePost}>Delete Post</button>
             </form>
         </div>
     )
