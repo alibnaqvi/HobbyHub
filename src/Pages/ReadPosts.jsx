@@ -22,20 +22,20 @@ function ReadPosts(props) {
             {
                 posts && posts.length > 0 ? (
                     posts.map((post) => (
-                        <div key={post.id} className="crewmate-card-container">
+                        <div key={post.id}>
                             <Link to={`edit/${post.id}`}>
-                                <button className="header-button">Edit</button>
+                                <button>Edit</button>
                             </Link>
 
-                            <p className="crewmate-name">{post.title}</p>
+                            <p>{post.title}</p>
 
                             <Link to={`view/${post.id}`}>
-                                <button className="header-button">View</button>
+                                <button>View</button>
                             </Link>
                         </div>
                     ))
                 ) : (
-                    <p className="no-crewmates-message">{'No Posts Yet'}</p>
+                    <p>{'No Posts Yet'}</p>
                 )
             }
         </div>

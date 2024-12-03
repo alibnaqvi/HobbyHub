@@ -1,13 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../Client.jsx'
 import '../App.css';
 
 function EditPost() {
     const {id} = useParams();
-    const [post, setPost] = useState({id: null, title: ""});
+    const [post, setPost] = useState({ id: null, title: "" });
+    const [loading, setLoading] = useState(true);
 
-    const updatePost = async (event) => {
+    useEffect(() => {
+        const fetchPost = async () => {
+            const { data, error } = await supabase
+                .from('Posts')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                console.error("Error fetching post:", error);
+            }
+
+            else {
+                setPost(data);
+            }
+
+            setLoading(false);
+        };
+
+        fetchPost();
+    }, [id]);
+
+    const editPost = async (event) => {
         event.preventDefault();
 
         await supabase
@@ -40,21 +63,18 @@ function EditPost() {
         })
     }
 
+    if (loading) return <div>Loading...</div>;
+
     return (
-        <div className="form-container">
-            <form className="crewmate-form">
-                <label className="form-label" htmlFor="name">Title</label>
+        <div>
+            <form>
+                <label htmlFor="name">Title</label>
 
-                <br/>
+                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
 
-                <input className="form-input" type="text" id="title" name="title" value={post.title} onChange={handleChange} />
+                <input type="submit" value="Submit" onClick={editPost} />
 
-                <br/>
-                <br/>
-
-                <input className="form-submit" type="submit" value="Submit" onClick={updatePost} />
-
-                <button className="form-delete" onClick={deletePost}>Delete</button>
+                <button onClick={deletePost}>Delete</button>
             </form>
         </div>
     )

@@ -1,10 +1,4 @@
-# Web Development Final Project - *HobbyHub*
-
-Submitted by: **Ali Naqvi**
-
-This web app: **is a potential Reddit Ripoff.**
-
-Time spent: **2** hours spent in total
+# This web app: **is a potential Reddit Ripoff.**
 
 ## Required Features
 

@@ -25,18 +25,13 @@ function AddPost() {
     }
 
     return (
-        <div className="form-container">
-            <form className="crewmate-form">
-                <label className="form-label" htmlFor="name">Title</label>
+        <div>
+            <form>
+                <label htmlFor="name">Title</label>
 
-                <br/>
+                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
 
-                <input className="form-input" type="text" id="title" name="title" value={post.title} onChange={handleChange} />
-
-                <br/>
-                <br/>
-
-                <input className="form-submit" type="submit" value="Submit" onClick={addPost} />
+                <input type="submit" value="Submit" onClick={addPost} />
             </form>
         </div>
     );

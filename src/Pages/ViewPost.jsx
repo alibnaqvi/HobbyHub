@@ -17,7 +17,9 @@ function ViewPost() {
                     .eq('id', id)
                     .single();
 
-                if (error) throw error;
+                if (error) {
+                    throw error;
+                }
 
                 setPost(data);
             }
@@ -41,7 +43,7 @@ function ViewPost() {
     if (!post) return <p>No post found.</p>;
 
     return (
-        <div className="crewmate-info">
+        <div>
             <h1>{post.title}</h1>
         </div>
     );
